@@ -1,0 +1,1742 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spanish GCSE Master</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #FF6B35;
+            --secondary: #F7B731;
+            --accent: #5F27CD;
+            --success: #00D2D3;
+            --background: #FFF8F0;
+            --card-bg: #FFFFFF;
+            --text: #2C3E50;
+            --text-light: #7F8C8D;
+            --shadow: rgba(95, 39, 205, 0.1);
+        }
+
+        body {
+            font-family: 'Fredoka', sans-serif;
+            background: var(--background);
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Animated Background */
+        body::before {
+            content: '';
+            position: fixed;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(255, 107, 53, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(95, 39, 205, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 40% 20%, rgba(247, 183, 49, 0.1) 0%, transparent 50%);
+            animation: float 20s ease-in-out infinite;
+            z-index: -1;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            33% { transform: translate(30px, -30px) rotate(5deg); }
+            66% { transform: translate(-20px, 20px) rotate(-5deg); }
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            text-align: center;
+            padding: 40px 20px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+            border-radius: 30px;
+            margin-bottom: 40px;
+            box-shadow: 0 20px 60px var(--shadow);
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '¡Hola!';
+            position: absolute;
+            font-size: 200px;
+            font-weight: 700;
+            color: rgba(255, 255, 255, 0.05);
+            top: -50px;
+            right: -50px;
+            transform: rotate(-15deg);
+            pointer-events: none;
+        }
+
+        h1 {
+            font-size: 3.5em;
+            color: white;
+            font-weight: 700;
+            position: relative;
+            z-index: 1;
+            text-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 1.2em;
+            position: relative;
+            z-index: 1;
+        }
+
+        .stats-bar {
+            display: flex;
+            justify-content: space-around;
+            gap: 20px;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+        }
+
+        .stat-card {
+            flex: 1;
+            min-width: 150px;
+            background: var(--card-bg);
+            padding: 25px;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 10px 30px var(--shadow);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px var(--shadow);
+        }
+
+        .stat-number {
+            font-size: 2.5em;
+            font-weight: 700;
+            color: var(--accent);
+            font-family: 'Space Mono', monospace;
+        }
+
+        .stat-label {
+            color: var(--text-light);
+            font-size: 0.9em;
+            margin-top: 5px;
+        }
+
+        .mode-selector {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .mode-card {
+            background: var(--card-bg);
+            padding: 30px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px var(--shadow);
+            border: 3px solid transparent;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .mode-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .mode-card:hover::before {
+            left: 100%;
+        }
+
+        .mode-card:hover {
+            transform: scale(1.05);
+            border-color: var(--primary);
+        }
+
+        .mode-icon {
+            font-size: 3em;
+            margin-bottom: 15px;
+        }
+
+        .mode-title {
+            font-size: 1.5em;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: var(--accent);
+        }
+
+        .mode-description {
+            color: var(--text-light);
+            font-size: 0.95em;
+        }
+
+        .learning-area {
+            background: var(--card-bg);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px var(--shadow);
+            min-height: 400px;
+            display: none;
+            animation: slideIn 0.5s ease;
+        }
+
+        .learning-area.active {
+            display: block;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .flashcard {
+            perspective: 1000px;
+            width: 100%;
+            max-width: 600px;
+            margin: 0 auto;
+            height: 400px;
+        }
+
+        .flashcard-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+        }
+
+        .flashcard.flipped .flashcard-inner {
+            transform: rotateY(180deg);
+        }
+
+        .flashcard-front, .flashcard-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.1);
+        }
+
+        .flashcard-front {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .flashcard-back {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            transform: rotateY(180deg);
+        }
+
+        .word-display {
+            font-size: 3em;
+            font-weight: 700;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .context-sentence {
+            font-size: 1.2em;
+            text-align: center;
+            font-style: italic;
+            margin-top: 20px;
+            opacity: 0.9;
+        }
+
+        .controls {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 15px 30px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Fredoka', sans-serif;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        .btn:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        .btn span {
+            position: relative;
+            z-index: 1;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(255, 107, 53, 0.3);
+        }
+
+        .btn-secondary {
+            background: var(--card-bg);
+            color: var(--accent);
+            border: 2px solid var(--accent);
+        }
+
+        .btn-secondary:hover {
+            background: var(--accent);
+            color: white;
+        }
+
+        .btn-success {
+            background: var(--success);
+            color: white;
+        }
+
+        .btn-success:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 210, 211, 0.3);
+        }
+
+        .quiz-area {
+            text-align: center;
+        }
+
+        .question {
+            font-size: 1.8em;
+            font-weight: 600;
+            margin-bottom: 40px;
+            color: var(--accent);
+        }
+
+        .options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .option-btn {
+            padding: 20px;
+            background: var(--card-bg);
+            border: 3px solid var(--text-light);
+            border-radius: 15px;
+            font-size: 1.1em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Fredoka', sans-serif;
+        }
+
+        .option-btn:hover {
+            border-color: var(--accent);
+            transform: scale(1.05);
+        }
+
+        .option-btn.correct {
+            background: var(--success);
+            color: white;
+            border-color: var(--success);
+            animation: pulse 0.5s ease;
+        }
+
+        .option-btn.incorrect {
+            background: #E74C3C;
+            color: white;
+            border-color: #E74C3C;
+            animation: shake 0.5s ease;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-10px); }
+            75% { transform: translateX(10px); }
+        }
+
+        .feedback {
+            font-size: 1.2em;
+            margin-top: 20px;
+            padding: 20px;
+            border-radius: 15px;
+            animation: slideIn 0.5s ease;
+        }
+
+        .feedback.correct {
+            background: rgba(0, 210, 211, 0.1);
+            color: var(--success);
+        }
+
+        .feedback.incorrect {
+            background: rgba(231, 76, 60, 0.1);
+            color: #E74C3C;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 15px;
+            background: rgba(0, 0, 0, 0.05);
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 30px;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            transition: width 0.5s ease;
+            border-radius: 10px;
+        }
+
+        .conjugation-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 10px;
+            margin-top: 20px;
+        }
+
+        .conjugation-table td {
+            padding: 15px;
+            background: var(--background);
+            border-radius: 10px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .conjugation-table td:hover {
+            background: var(--accent);
+            color: white;
+            transform: scale(1.05);
+        }
+
+        .pronoun {
+            font-weight: 600;
+            color: var(--accent);
+        }
+
+        .input-area {
+            margin: 30px 0;
+        }
+
+        .spanish-input {
+            width: 100%;
+            padding: 20px;
+            font-size: 1.3em;
+            border: 3px solid var(--text-light);
+            border-radius: 15px;
+            font-family: 'Fredoka', sans-serif;
+            transition: all 0.3s ease;
+        }
+
+        .spanish-input:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 5px rgba(95, 39, 205, 0.1);
+        }
+
+        .streak-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: linear-gradient(135deg, #FF6B35 0%, #F7B731 100%);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 50px;
+            font-weight: 600;
+            animation: bounce 2s ease infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+
+        .achievement-popup {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            z-index: 1000;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .achievement-popup.show {
+            transform: translate(-50%, -50%) scale(1);
+        }
+
+        .achievement-icon {
+            font-size: 5em;
+            margin-bottom: 20px;
+        }
+
+        .back-btn {
+            margin-bottom: 20px;
+        }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 2.5em; }
+            .word-display { font-size: 2em; }
+            .flashcard { height: 350px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Spanish GCSE Master</h1>
+            <p class="subtitle">Evidence-Based Learning for Excellence</p>
+        </header>
+
+        <div class="stats-bar">
+            <div class="stat-card">
+                <div class="stat-number" id="wordsLearned">0</div>
+                <div class="stat-label">Words Mastered</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="streakDays">0</div>
+                <div class="stat-label">Day Streak 🔥</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="accuracy">0%</div>
+                <div class="stat-label">Accuracy</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="totalPoints">0</div>
+                <div class="stat-label">Total Points</div>
+            </div>
+        </div>
+
+        <div class="mode-selector" id="modeSelector">
+            <div class="mode-card" onclick="startMode('flashcards')">
+                <div class="mode-icon">🎴</div>
+                <div class="mode-title">Flashcards</div>
+                <div class="mode-description">Active recall with spaced repetition - proven to boost retention by 200%</div>
+            </div>
+            <div class="mode-card" onclick="startMode('quiz')">
+                <div class="mode-icon">🎯</div>
+                <div class="mode-title">Smart Quiz</div>
+                <div class="mode-description">Retrieval practice with immediate feedback - the testing effect in action</div>
+            </div>
+            <div class="mode-card" onclick="startMode('conjugation')">
+                <div class="mode-icon">⚡</div>
+                <div class="mode-title">Verb Builder</div>
+                <div class="mode-description">Pattern recognition for tenses - build automaticity through practice</div>
+            </div>
+            <div class="mode-card" onclick="startMode('sentences')">
+                <div class="mode-icon">💬</div>
+                <div class="mode-title">Context Master</div>
+                <div class="mode-description">Contextual learning - words in real GCSE-style sentences</div>
+            </div>
+        </div>
+
+        <div class="learning-area" id="learningArea">
+            <button class="btn btn-secondary back-btn" onclick="backToMenu()">
+                <span>← Back to Menu</span>
+            </button>
+            <div id="content"></div>
+        </div>
+    </div>
+
+    <div class="achievement-popup" id="achievementPopup">
+        <div class="achievement-icon">🏆</div>
+        <h2 id="achievementTitle"></h2>
+        <p id="achievementText"></p>
+        <button class="btn btn-primary" onclick="closeAchievement()">
+            <span>¡Genial!</span>
+        </button>
+    </div>
+
+    <script>
+        // GCSE Spanish Vocabulary Database - Organized by Theme (550 words)
+        const vocabulary = {
+            identity: [
+                { spanish: 'la familia', english: 'family', context: 'Mi familia es muy importante para mí' },
+                { spanish: 'el hermano', english: 'brother', context: 'Tengo un hermano mayor' },
+                { spanish: 'la hermana', english: 'sister', context: 'Mi hermana tiene quince años' },
+                { spanish: 'los padres', english: 'parents', context: 'Mis padres trabajan en Londres' },
+                { spanish: 'el pelo', english: 'hair', context: 'Tengo el pelo largo y rubio' },
+                { spanish: 'los ojos', english: 'eyes', context: 'Tiene los ojos azules' },
+                { spanish: 'alto/a', english: 'tall', context: 'Mi padre es muy alto' },
+                { spanish: 'bajo/a', english: 'short', context: 'Soy bastante baja' },
+                { spanish: 'simpático/a', english: 'nice/friendly', context: 'Mi mejor amigo es muy simpático' },
+                { spanish: 'divertido/a', english: 'funny', context: 'Mi profesora es muy divertida' },
+                { spanish: 'la madre', english: 'mother', context: 'Mi madre es enfermera' },
+                { spanish: 'el padre', english: 'father', context: 'Mi padre cocina muy bien' },
+                { spanish: 'el abuelo', english: 'grandfather', context: 'Mi abuelo tiene ochenta años' },
+                { spanish: 'la abuela', english: 'grandmother', context: 'Visito a mi abuela los domingos' },
+                { spanish: 'el tío', english: 'uncle', context: 'Mi tío vive en España' },
+                { spanish: 'la tía', english: 'aunt', context: 'Mi tía es profesora' },
+                { spanish: 'el primo', english: 'cousin (male)', context: 'Mi primo juega al rugby' },
+                { spanish: 'la prima', english: 'cousin (female)', context: 'Mi prima estudia medicina' },
+                { spanish: 'el hijo', english: 'son', context: 'Es el hijo mayor' },
+                { spanish: 'la hija', english: 'daughter', context: 'Tiene una hija pequeña' },
+                { spanish: 'casado/a', english: 'married', context: 'Mis padres están casados' },
+                { spanish: 'soltero/a', english: 'single', context: 'Mi hermano es soltero' },
+                { spanish: 'divorciado/a', english: 'divorced', context: 'Mis padres están divorciados' },
+                { spanish: 'gordo/a', english: 'fat', context: 'Mi gato es un poco gordo' },
+                { spanish: 'delgado/a', english: 'thin', context: 'Es muy delgado y alto' },
+                { spanish: 'guapo/a', english: 'handsome/pretty', context: 'Mi hermana es muy guapa' },
+                { spanish: 'feo/a', english: 'ugly', context: 'El edificio es bastante feo' },
+                { spanish: 'joven', english: 'young', context: 'Soy bastante joven' },
+                { spanish: 'viejo/a', english: 'old', context: 'Mi abuelo es muy viejo' },
+                { spanish: 'fuerte', english: 'strong', context: 'Mi padre es muy fuerte' },
+                { spanish: 'débil', english: 'weak', context: 'Me siento débil hoy' },
+                { spanish: 'inteligente', english: 'intelligent', context: 'Mi hermana es muy inteligente' },
+                { spanish: 'tonto/a', english: 'silly/stupid', context: 'No seas tonto' },
+                { spanish: 'trabajador/a', english: 'hardworking', context: 'Soy muy trabajador' },
+                { spanish: 'perezoso/a', english: 'lazy', context: 'Mi hermano es un poco perezoso' },
+                { spanish: 'generoso/a', english: 'generous', context: 'Es una persona muy generosa' },
+                { spanish: 'egoísta', english: 'selfish', context: 'No me gustan las personas egoístas' },
+                { spanish: 'tímido/a', english: 'shy', context: 'Era muy tímido de pequeño' },
+                { spanish: 'hablador/a', english: 'talkative', context: 'Mi amiga es muy habladora' },
+                { spanish: 'el carácter', english: 'character/personality', context: 'Tiene un carácter fuerte' },
+                { spanish: 'llevarse bien', english: 'to get along', context: 'Me llevo bien con mi hermano' },
+                { spanish: 'llevarse mal', english: 'to not get along', context: 'Me llevo mal con mi prima' },
+                { spanish: 'parecerse a', english: 'to look like', context: 'Me parezco a mi padre' },
+                { spanish: 'el cumpleaños', english: 'birthday', context: 'Mi cumpleaños es en julio' },
+                { spanish: 'la edad', english: 'age', context: 'Tengo trece años de edad' },
+                { spanish: 'nacer', english: 'to be born', context: 'Nací en Inglaterra' }
+            ],
+            school: [
+                { spanish: 'el instituto', english: 'school/high school', context: 'Voy al instituto todos los días' },
+                { spanish: 'la asignatura', english: 'subject', context: 'Mi asignatura favorita es el español' },
+                { spanish: 'las matemáticas', english: 'maths', context: 'Las matemáticas son difíciles' },
+                { spanish: 'el profesor', english: 'teacher (male)', context: 'El profesor de ciencias es estricto' },
+                { spanish: 'la profesora', english: 'teacher (female)', context: 'La profesora de inglés es simpática' },
+                { spanish: 'estudiar', english: 'to study', context: 'Tengo que estudiar para el examen' },
+                { spanish: 'el recreo', english: 'break time', context: 'Juego al fútbol en el recreo' },
+                { spanish: 'los deberes', english: 'homework', context: 'Hago los deberes por la tarde' },
+                { spanish: 'el uniforme', english: 'uniform', context: 'Llevo uniforme al instituto' },
+                { spanish: 'el examen', english: 'exam', context: 'El examen es muy importante' },
+                { spanish: 'la clase', english: 'class', context: 'Mi clase favorita es inglés' },
+                { spanish: 'el curso', english: 'year/course', context: 'Estoy en el tercer curso' },
+                { spanish: 'la escuela primaria', english: 'primary school', context: 'Fui a la escuela primaria aquí' },
+                { spanish: 'el colegio', english: 'school', context: 'Mi colegio es muy grande' },
+                { spanish: 'la universidad', english: 'university', context: 'Quiero ir a la universidad' },
+                { spanish: 'el alumno', english: 'student (male)', context: 'Es un alumno excelente' },
+                { spanish: 'la alumna', english: 'student (female)', context: 'Soy una alumna trabajadora' },
+                { spanish: 'el compañero', english: 'classmate (male)', context: 'Mi compañero es muy simpático' },
+                { spanish: 'la compañera', english: 'classmate (female)', context: 'Mi compañera me ayuda' },
+                { spanish: 'el director', english: 'headteacher (male)', context: 'El director es muy estricto' },
+                { spanish: 'la directora', english: 'headteacher (female)', context: 'La directora da los premios' },
+                { spanish: 'las ciencias', english: 'science', context: 'Las ciencias me fascinan' },
+                { spanish: 'la química', english: 'chemistry', context: 'La química es difícil' },
+                { spanish: 'la física', english: 'physics', context: 'Estudio física y matemáticas' },
+                { spanish: 'la biología', english: 'biology', context: 'La biología es interesante' },
+                { spanish: 'la historia', english: 'history', context: 'Me encanta la historia' },
+                { spanish: 'la geografía', english: 'geography', context: 'La geografía es útil' },
+                { spanish: 'el inglés', english: 'English', context: 'Hablo inglés y español' },
+                { spanish: 'el español', english: 'Spanish', context: 'El español es mi asignatura favorita' },
+                { spanish: 'el francés', english: 'French', context: 'Estudio francés también' },
+                { spanish: 'el alemán', english: 'German', context: 'El alemán es muy difícil' },
+                { spanish: 'la educación física', english: 'PE', context: 'Tengo educación física los martes' },
+                { spanish: 'el arte', english: 'art', context: 'El arte es muy creativo' },
+                { spanish: 'la música', english: 'music', context: 'Toco el piano en clase de música' },
+                { spanish: 'la tecnología', english: 'technology', context: 'La tecnología es moderna' },
+                { spanish: 'la informática', english: 'ICT/computing', context: 'Aprendo informática' },
+                { spanish: 'el teatro', english: 'drama', context: 'Me gusta el teatro' },
+                { spanish: 'aprender', english: 'to learn', context: 'Me encanta aprender cosas nuevas' },
+                { spanish: 'enseñar', english: 'to teach', context: 'El profesor enseña bien' },
+                { spanish: 'la nota', english: 'grade/mark', context: 'Saqué buenas notas' },
+                { spanish: 'aprobar', english: 'to pass', context: 'Aprobé todos mis exámenes' },
+                { spanish: 'suspender', english: 'to fail', context: 'Suspendí matemáticas' },
+                { spanish: 'el libro', english: 'book', context: 'Leo muchos libros' },
+                { spanish: 'el cuaderno', english: 'notebook', context: 'Escribo en mi cuaderno' },
+                { spanish: 'el bolígrafo', english: 'pen', context: 'Necesito un bolígrafo' },
+                { spanish: 'el lápiz', english: 'pencil', context: 'Dibujo con lápiz' },
+                { spanish: 'la regla', english: 'ruler', context: 'Uso una regla en matemáticas' },
+                { spanish: 'la goma', english: 'rubber/eraser', context: 'No tengo una goma' },
+                { spanish: 'las tijeras', english: 'scissors', context: 'Necesito unas tijeras' },
+                { spanish: 'la mochila', english: 'backpack', context: 'Mi mochila es pesada' },
+                { spanish: 'el estuche', english: 'pencil case', context: 'Guardo los bolígrafos en el estuche' },
+                { spanish: 'la pizarra', english: 'whiteboard', context: 'El profesor escribe en la pizarra' },
+                { spanish: 'el ordenador', english: 'computer', context: 'Uso el ordenador para estudiar' },
+                { spanish: 'la tableta', english: 'tablet', context: 'Tengo una tableta nueva' },
+                { spanish: 'el aula', english: 'classroom', context: 'El aula es muy grande' },
+                { spanish: 'la biblioteca', english: 'library', context: 'Estudio en la biblioteca' },
+                { spanish: 'el laboratorio', english: 'laboratory', context: 'Hacemos experimentos en el laboratorio' },
+                { spanish: 'el gimnasio', english: 'gym', context: 'El gimnasio es moderno' },
+                { spanish: 'el patio', english: 'playground/courtyard', context: 'Jugamos en el patio' },
+                { spanish: 'la cantina', english: 'canteen', context: 'Como en la cantina' },
+                { spanish: 'el comedor', english: 'dining hall', context: 'El comedor es ruidoso' },
+                { spanish: 'las vacaciones', english: 'holidays', context: 'Me encantan las vacaciones de verano' },
+                { spanish: 'el trimestre', english: 'term', context: 'El trimestre termina en julio' },
+                { spanish: 'el horario', english: 'timetable', context: 'Mi horario es complicado' },
+                { spanish: 'la lección', english: 'lesson', context: 'La lección dura una hora' },
+                { spanish: 'durar', english: 'to last', context: 'Las clases duran cincuenta minutos' },
+                { spanish: 'empezar', english: 'to start', context: 'Las clases empiezan a las nueve' },
+                { spanish: 'terminar', english: 'to finish', context: 'Terminamos a las tres' },
+                { spanish: 'difícil', english: 'difficult', context: 'La tarea es muy difícil' },
+                { spanish: 'fácil', english: 'easy', context: 'El examen fue fácil' },
+                { spanish: 'aburrido/a', english: 'boring', context: 'La clase es aburrida' },
+                { spanish: 'interesante', english: 'interesting', context: 'El libro es muy interesante' },
+                { spanish: 'útil', english: 'useful', context: 'Las matemáticas son útiles' },
+                { spanish: 'inútil', english: 'useless', context: 'Pienso que es inútil' },
+                { spanish: 'estricto/a', english: 'strict', context: 'El profesor es bastante estricto' },
+                { spanish: 'severo/a', english: 'severe/strict', context: 'Las reglas son muy severas' }
+            ],
+            hobbies: [
+                { spanish: 'jugar', english: 'to play', context: 'Me gusta jugar al fútbol' },
+                { spanish: 'ver', english: 'to watch', context: 'Me encanta ver películas' },
+                { spanish: 'escuchar', english: 'to listen', context: 'Escucho música todos los días' },
+                { spanish: 'leer', english: 'to read', context: 'Leo novelas en mi tiempo libre' },
+                { spanish: 'nadar', english: 'to swim', context: 'Voy a nadar los sábados' },
+                { spanish: 'bailar', english: 'to dance', context: 'Me gusta bailar con mis amigos' },
+                { spanish: 'cantar', english: 'to sing', context: 'Canto en el coro del instituto' },
+                { spanish: 'dibujar', english: 'to draw', context: 'Dibujo en mi cuaderno' },
+                { spanish: 'el deporte', english: 'sport', context: 'Practico muchos deportes' },
+                { spanish: 'la música', english: 'music', context: 'La música es mi pasión' },
+                { spanish: 'el fútbol', english: 'football', context: 'Juego al fútbol cada semana' },
+                { spanish: 'el baloncesto', english: 'basketball', context: 'Me encanta el baloncesto' },
+                { spanish: 'el tenis', english: 'tennis', context: 'Practico tenis los domingos' },
+                { spanish: 'el rugby', english: 'rugby', context: 'El rugby es muy físico' },
+                { spanish: 'el ciclismo', english: 'cycling', context: 'Hago ciclismo en el parque' },
+                { spanish: 'la natación', english: 'swimming', context: 'La natación es mi deporte favorito' },
+                { spanish: 'el atletismo', english: 'athletics', context: 'Practico atletismo en el instituto' },
+                { spanish: 'el patinaje', english: 'skating', context: 'Me gusta el patinaje sobre hielo' },
+                { spanish: 'el esquí', english: 'skiing', context: 'Voy a esquiar en invierno' },
+                { spanish: 'montar', english: 'to ride', context: 'Me gusta montar en bicicleta' },
+                { spanish: 'la bicicleta', english: 'bicycle', context: 'Tengo una bicicleta nueva' },
+                { spanish: 'el equipo', english: 'team', context: 'Juego en el equipo de fútbol' },
+                { spanish: 'el partido', english: 'match/game', context: 'Ganamos el partido ayer' },
+                { spanish: 'ganar', english: 'to win', context: 'Queremos ganar el campeonato' },
+                { spanish: 'perder', english: 'to lose', context: 'No me gusta perder' },
+                { spanish: 'el cine', english: 'cinema', context: 'Voy al cine los sábados' },
+                { spanish: 'la película', english: 'film', context: 'La película fue increíble' },
+                { spanish: 'la serie', english: 'series', context: 'Veo series en Netflix' },
+                { spanish: 'el programa', english: 'programme', context: 'Mi programa favorito es un concurso' },
+                { spanish: 'la canción', english: 'song', context: 'Escucho esta canción mucho' },
+                { spanish: 'el concierto', english: 'concert', context: 'Fui a un concierto increíble' },
+                { spanish: 'tocar', english: 'to play (instrument)', context: 'Toco la guitarra desde hace cinco años' },
+                { spanish: 'la guitarra', english: 'guitar', context: 'Tengo una guitarra eléctrica' },
+                { spanish: 'el piano', english: 'piano', context: 'Aprendo a tocar el piano' },
+                { spanish: 'la batería', english: 'drums', context: 'Mi hermano toca la batería' },
+                { spanish: 'el violín', english: 'violin', context: 'El violín es difícil' },
+                { spanish: 'el libro', english: 'book', context: 'Leo libros de aventura' },
+                { spanish: 'la novela', english: 'novel', context: 'Esta novela es muy emocionante' },
+                { spanish: 'la revista', english: 'magazine', context: 'Compro revistas de música' },
+                { spanish: 'el periódico', english: 'newspaper', context: 'Mi padre lee el periódico' },
+                { spanish: 'el videojuego', english: 'video game', context: 'Juego videojuegos con mis amigos' },
+                { spanish: 'la consola', english: 'console', context: 'Tengo una consola nueva' },
+                { spanish: 'salir', english: 'to go out', context: 'Salgo con mis amigos los fines de semana' },
+                { spanish: 'ir de compras', english: 'to go shopping', context: 'Me gusta ir de compras' },
+                { spanish: 'chatear', english: 'to chat online', context: 'Chateo con mis amigos' },
+                { spanish: 'las redes sociales', english: 'social media', context: 'Uso las redes sociales cada día' },
+                { spanish: 'el móvil', english: 'mobile phone', context: 'No puedo vivir sin mi móvil' },
+                { spanish: 'sacar fotos', english: 'to take photos', context: 'Me encanta sacar fotos' },
+                { spanish: 'la fotografía', english: 'photography', context: 'La fotografía es mi pasión' },
+                { spanish: 'pintar', english: 'to paint', context: 'Pinto paisajes' },
+                { spanish: 'cocinar', english: 'to cook', context: 'Me gusta cocinar postres' },
+                { spanish: 'hacer', english: 'to do/make', context: 'Hago deporte tres veces por semana' },
+                { spanish: 'practicar', english: 'to practise', context: 'Practico mucho' },
+                { spanish: 'pasear', english: 'to go for a walk', context: 'Paseo con mi perro' },
+                { spanish: 'descansar', english: 'to rest', context: 'Necesito descansar' },
+                { spanish: 'relajarse', english: 'to relax', context: 'Me relajo viendo la tele' },
+                { spanish: 'divertirse', english: 'to have fun', context: 'Me divierto mucho con mis amigos' },
+                { spanish: 'aburrirse', english: 'to get bored', context: 'Me aburro en casa' },
+                { spanish: 'el tiempo libre', english: 'free time', context: 'En mi tiempo libre leo' },
+                { spanish: 'el pasatiempo', english: 'hobby', context: 'Mi pasatiempo favorito es nadar' },
+                { spanish: 'la afición', english: 'hobby/interest', context: 'Tengo muchas aficiones' },
+                { spanish: 'emocionante', english: 'exciting', context: 'El partido fue muy emocionante' },
+                { spanish: 'relajante', english: 'relaxing', context: 'Leer es muy relajante' },
+                { spanish: 'divertido/a', english: 'fun', context: 'Fue una experiencia muy divertida' }
+            ],
+            food: [
+                { spanish: 'el desayuno', english: 'breakfast', context: 'Tomo el desayuno a las siete' },
+                { spanish: 'la comida', english: 'lunch/meal', context: 'La comida está deliciosa' },
+                { spanish: 'la cena', english: 'dinner', context: 'Ceno con mi familia' },
+                { spanish: 'el agua', english: 'water', context: 'Bebo mucha agua' },
+                { spanish: 'la fruta', english: 'fruit', context: 'Como fruta todos los días' },
+                { spanish: 'las verduras', english: 'vegetables', context: 'Las verduras son sanas' },
+                { spanish: 'el pollo', english: 'chicken', context: 'El pollo está muy rico' },
+                { spanish: 'el pescado', english: 'fish', context: 'No me gusta el pescado' },
+                { spanish: 'tener hambre', english: 'to be hungry', context: 'Tengo mucha hambre' },
+                { spanish: 'tener sed', english: 'to be thirsty', context: 'Tengo sed después del deporte' },
+                { spanish: 'comer', english: 'to eat', context: 'Como en la cantina' },
+                { spanish: 'beber', english: 'to drink', context: 'Bebo zumo de naranja' },
+                { spanish: 'tomar', english: 'to have (food/drink)', context: 'Tomo café por la mañana' },
+                { spanish: 'el pan', english: 'bread', context: 'Como pan con mantequilla' },
+                { spanish: 'los cereales', english: 'cereal', context: 'Desayuno cereales con leche' },
+                { spanish: 'la leche', english: 'milk', context: 'Tomo leche fría' },
+                { spanish: 'el café', english: 'coffee', context: 'Mis padres beben café' },
+                { spanish: 'el té', english: 'tea', context: 'Prefiero el té' },
+                { spanish: 'el zumo', english: 'juice', context: 'El zumo de naranja es mi favorito' },
+                { spanish: 'la carne', english: 'meat', context: 'No como mucha carne' },
+                { spanish: 'el jamón', english: 'ham', context: 'Me encanta el jamón serrano' },
+                { spanish: 'el chorizo', english: 'chorizo', context: 'El chorizo es muy picante' },
+                { spanish: 'la ternera', english: 'beef', context: 'La ternera está deliciosa' },
+                { spanish: 'el cerdo', english: 'pork', context: 'No me gusta el cerdo' },
+                { spanish: 'el marisco', english: 'seafood', context: 'El marisco es caro' },
+                { spanish: 'el arroz', english: 'rice', context: 'Como arroz con verduras' },
+                { spanish: 'la pasta', english: 'pasta', context: 'La pasta es mi comida favorita' },
+                { spanish: 'las patatas', english: 'potatoes', context: 'Las patatas fritas son deliciosas' },
+                { spanish: 'las patatas fritas', english: 'chips/crisps', context: 'Me encantan las patatas fritas' },
+                { spanish: 'la ensalada', english: 'salad', context: 'Como ensalada cada día' },
+                { spanish: 'el tomate', english: 'tomato', context: 'Los tomates son rojos' },
+                { spanish: 'la lechuga', english: 'lettuce', context: 'La lechuga es verde' },
+                { spanish: 'la zanahoria', english: 'carrot', context: 'Las zanahorias son naranjas' },
+                { spanish: 'la cebolla', english: 'onion', context: 'No me gusta la cebolla' },
+                { spanish: 'el ajo', english: 'garlic', context: 'El ajo es muy fuerte' },
+                { spanish: 'la manzana', english: 'apple', context: 'Como una manzana cada día' },
+                { spanish: 'el plátano', english: 'banana', context: 'Los plátanos son saludables' },
+                { spanish: 'la naranja', english: 'orange', context: 'Las naranjas tienen vitamina C' },
+                { spanish: 'la fresa', english: 'strawberry', context: 'Las fresas son mis favoritas' },
+                { spanish: 'la uva', english: 'grape', context: 'Las uvas son dulces' },
+                { spanish: 'el queso', english: 'cheese', context: 'Me encanta el queso' },
+                { spanish: 'el yogur', english: 'yogurt', context: 'Tomo yogur después de comer' },
+                { spanish: 'la mantequilla', english: 'butter', context: 'Pongo mantequilla en el pan' },
+                { spanish: 'el huevo', english: 'egg', context: 'Desayuno huevos revueltos' },
+                { spanish: 'el chocolate', english: 'chocolate', context: 'Me encanta el chocolate' },
+                { spanish: 'el helado', english: 'ice cream', context: 'El helado de vainilla es delicioso' },
+                { spanish: 'la tarta', english: 'cake', context: 'La tarta de cumpleaños está rica' },
+                { spanish: 'las galletas', english: 'biscuits/cookies', context: 'Como galletas de chocolate' },
+                { spanish: 'el bocadillo', english: 'sandwich', context: 'Como un bocadillo de jamón' },
+                { spanish: 'la pizza', english: 'pizza', context: 'Pedimos pizza los viernes' },
+                { spanish: 'la hamburguesa', english: 'hamburger', context: 'Las hamburguesas son mi comida favorita' },
+                { spanish: 'el restaurante', english: 'restaurant', context: 'Vamos al restaurante esta noche' },
+                { spanish: 'el camarero', english: 'waiter', context: 'El camarero es muy simpático' },
+                { spanish: 'la camarera', english: 'waitress', context: 'La camarera trae la comida' },
+                { spanish: 'la cuenta', english: 'bill', context: 'Queremos la cuenta por favor' },
+                { spanish: 'la propina', english: 'tip', context: 'Dejo una propina buena' },
+                { spanish: 'pedir', english: 'to order', context: 'Voy a pedir paella' },
+                { spanish: 'el menú', english: 'menu', context: 'Miro el menú' },
+                { spanish: 'el plato', english: 'dish/plate', context: 'Mi plato favorito es la paella' },
+                { spanish: 'rico/a', english: 'tasty/delicious', context: 'La comida está muy rica' },
+                { spanish: 'delicioso/a', english: 'delicious', context: 'El postre fue delicioso' },
+                { spanish: 'sano/a', english: 'healthy', context: 'Como comida sana' },
+                { spanish: 'saludable', english: 'healthy', context: 'Una dieta saludable es importante' },
+                { spanish: 'dulce', english: 'sweet', context: 'Me gusta la comida dulce' },
+                { spanish: 'salado/a', english: 'salty', context: 'Está demasiado salado' },
+                { spanish: 'picante', english: 'spicy', context: 'La comida mexicana es muy picante' },
+                { spanish: 'amargo/a', english: 'bitter', context: 'El café es amargo' },
+                { spanish: 'caliente', english: 'hot (temperature)', context: 'La sopa está muy caliente' },
+                { spanish: 'frío/a', english: 'cold', context: 'Prefiero la bebida fría' }
+            ],
+            time: [
+                { spanish: 'hoy', english: 'today', context: 'Hoy es lunes' },
+                { spanish: 'ayer', english: 'yesterday', context: 'Ayer fui al cine' },
+                { spanish: 'mañana', english: 'tomorrow', context: 'Mañana tengo un examen' },
+                { spanish: 'la semana', english: 'week', context: 'La semana que viene es mi cumpleaños' },
+                { spanish: 'el fin de semana', english: 'weekend', context: 'Los fines de semana salgo con amigos' },
+                { spanish: 'por la mañana', english: 'in the morning', context: 'Por la mañana voy al instituto' },
+                { spanish: 'por la tarde', english: 'in the afternoon', context: 'Por la tarde hago deporte' },
+                { spanish: 'por la noche', english: 'at night', context: 'Por la noche veo la tele' },
+                { spanish: 'siempre', english: 'always', context: 'Siempre hago los deberes' },
+                { spanish: 'nunca', english: 'never', context: 'Nunca llego tarde' },
+                { spanish: 'el lunes', english: 'Monday', context: 'El lunes tengo matemáticas' },
+                { spanish: 'el martes', english: 'Tuesday', context: 'El martes juego al fútbol' },
+                { spanish: 'el miércoles', english: 'Wednesday', context: 'El miércoles es mi día favorito' },
+                { spanish: 'el jueves', english: 'Thursday', context: 'El jueves tengo música' },
+                { spanish: 'el viernes', english: 'Friday', context: 'El viernes salgo con amigos' },
+                { spanish: 'el sábado', english: 'Saturday', context: 'Los sábados descanso' },
+                { spanish: 'el domingo', english: 'Sunday', context: 'El domingo voy a la iglesia' },
+                { spanish: 'el día', english: 'day', context: 'Hoy es un día bonito' },
+                { spanish: 'la semana pasada', english: 'last week', context: 'La semana pasada fui de compras' },
+                { spanish: 'la semana que viene', english: 'next week', context: 'La semana que viene hay exámenes' },
+                { spanish: 'el mes', english: 'month', context: 'Este mes es diciembre' },
+                { spanish: 'el año', english: 'year', context: 'El año que viene voy a España' },
+                { spanish: 'enero', english: 'January', context: 'En enero hace frío' },
+                { spanish: 'febrero', english: 'February', context: 'Mi cumpleaños es en febrero' },
+                { spanish: 'marzo', english: 'March', context: 'En marzo empieza la primavera' },
+                { spanish: 'abril', english: 'April', context: 'Abril tiene treinta días' },
+                { spanish: 'mayo', english: 'May', context: 'En mayo hace buen tiempo' },
+                { spanish: 'junio', english: 'June', context: 'Junio es el mes de los exámenes' },
+                { spanish: 'julio', english: 'July', context: 'En julio voy de vacaciones' },
+                { spanish: 'agosto', english: 'August', context: 'Agosto es muy caluroso' },
+                { spanish: 'septiembre', english: 'September', context: 'En septiembre empieza el curso' },
+                { spanish: 'octubre', english: 'October', context: 'Octubre es mi mes favorito' },
+                { spanish: 'noviembre', english: 'November', context: 'En noviembre llueve mucho' },
+                { spanish: 'diciembre', english: 'December', context: 'Diciembre es el mes de Navidad' },
+                { spanish: 'la primavera', english: 'spring', context: 'En primavera hay flores' },
+                { spanish: 'el verano', english: 'summer', context: 'El verano es mi estación favorita' },
+                { spanish: 'el otoño', english: 'autumn', context: 'En otoño caen las hojas' },
+                { spanish: 'el invierno', english: 'winter', context: 'El invierno es muy frío' },
+                { spanish: 'la hora', english: 'hour/time', context: 'La clase dura una hora' },
+                { spanish: 'el minuto', english: 'minute', context: 'Espera un minuto' },
+                { spanish: 'el segundo', english: 'second', context: 'Un segundo por favor' },
+                { spanish: 'temprano', english: 'early', context: 'Me levanto temprano' },
+                { spanish: 'tarde', english: 'late', context: 'Llego tarde a clase' },
+                { spanish: 'pronto', english: 'soon', context: 'Vuelvo pronto' },
+                { spanish: 'ahora', english: 'now', context: 'Ahora estoy estudiando' },
+                { spanish: 'luego', english: 'later', context: 'Luego voy al cine' },
+                { spanish: 'después', english: 'after/afterwards', context: 'Después de comer descanso' },
+                { spanish: 'antes', english: 'before', context: 'Antes de cenar hago los deberes' },
+                { spanish: 'durante', english: 'during', context: 'Durante el recreo juego' },
+                { spanish: 'a menudo', english: 'often', context: 'Voy al gimnasio a menudo' },
+                { spanish: 'a veces', english: 'sometimes', context: 'A veces como chocolate' },
+                { spanish: 'de vez en cuando', english: 'from time to time', context: 'De vez en cuando voy al teatro' },
+                { spanish: 'raramente', english: 'rarely', context: 'Raramente llego tarde' },
+                { spanish: 'todos los días', english: 'every day', context: 'Estudio todos los días' },
+                { spanish: 'cada día', english: 'each day', context: 'Cada día aprendo algo nuevo' },
+                { spanish: 'una vez', english: 'once', context: 'Voy al cine una vez por semana' },
+                { spanish: 'dos veces', english: 'twice', context: 'Entreno dos veces por semana' },
+                { spanish: 'tres veces', english: 'three times', context: 'Como tres veces al día' }
+            ],
+            travel: [
+                { spanish: 'viajar', english: 'to travel', context: 'Me encanta viajar por el mundo' },
+                { spanish: 'el viaje', english: 'journey/trip', context: 'El viaje fue increíble' },
+                { spanish: 'las vacaciones', english: 'holidays', context: 'Las vacaciones de verano son geniales' },
+                { spanish: 'ir', english: 'to go', context: 'Voy a España este verano' },
+                { spanish: 'visitar', english: 'to visit', context: 'Quiero visitar París' },
+                { spanish: 'el país', english: 'country', context: 'España es un país bonito' },
+                { spanish: 'la ciudad', english: 'city', context: 'Madrid es una ciudad grande' },
+                { spanish: 'el pueblo', english: 'town/village', context: 'Vivo en un pueblo pequeño' },
+                { spanish: 'la playa', english: 'beach', context: 'Vamos a la playa en verano' },
+                { spanish: 'el mar', english: 'sea', context: 'Me encanta nadar en el mar' },
+                { spanish: 'la montaña', english: 'mountain', context: 'Esquío en las montañas' },
+                { spanish: 'el hotel', english: 'hotel', context: 'Nos alojamos en un hotel' },
+                { spanish: 'el apartamento', english: 'apartment', context: 'Alquilamos un apartamento' },
+                { spanish: 'el camping', english: 'campsite', context: 'Vamos de camping en agosto' },
+                { spanish: 'la habitación', english: 'room', context: 'Mi habitación tiene vistas al mar' },
+                { spanish: 'la recepción', english: 'reception', context: 'Pregunto en la recepción' },
+                { spanish: 'reservar', english: 'to book/reserve', context: 'Necesito reservar una habitación' },
+                { spanish: 'alojarse', english: 'to stay', context: 'Me alojo en casa de mi amigo' },
+                { spanish: 'el avión', english: 'plane', context: 'Viajo en avión a España' },
+                { spanish: 'el aeropuerto', english: 'airport', context: 'Llegamos al aeropuerto temprano' },
+                { spanish: 'el vuelo', english: 'flight', context: 'El vuelo dura dos horas' },
+                { spanish: 'el tren', english: 'train', context: 'Cojo el tren a Londres' },
+                { spanish: 'la estación', english: 'station', context: 'La estación está cerca' },
+                { spanish: 'el autobús', english: 'bus', context: 'El autobús pasa cada hora' },
+                { spanish: 'el coche', english: 'car', context: 'Viajamos en coche' },
+                { spanish: 'el taxi', english: 'taxi', context: 'Cogemos un taxi al hotel' },
+                { spanish: 'el metro', english: 'underground/metro', context: 'El metro es rápido' },
+                { spanish: 'el barco', english: 'boat/ship', context: 'Cruzamos en barco' },
+                { spanish: 'el billete', english: 'ticket', context: 'Compro un billete de ida y vuelta' },
+                { spanish: 'la maleta', english: 'suitcase', context: 'Hago la maleta' },
+                { spanish: 'el equipaje', english: 'luggage', context: 'Mi equipaje es pesado' },
+                { spanish: 'el pasaporte', english: 'passport', context: 'Necesito mi pasaporte' },
+                { spanish: 'la frontera', english: 'border', context: 'Cruzamos la frontera' },
+                { spanish: 'la aduana', english: 'customs', context: 'Pasamos por la aduana' },
+                { spanish: 'llegar', english: 'to arrive', context: 'Llegamos a las ocho' },
+                { spanish: 'salir', english: 'to leave', context: 'Salimos mañana por la mañana' },
+                { spanish: 'partir', english: 'to depart', context: 'El tren parte a las nueve' },
+                { spanish: 'coger', english: 'to catch/take', context: 'Cojo el autobús' },
+                { spanish: 'subir', english: 'to get on/go up', context: 'Subo al tren' },
+                { spanish: 'bajar', english: 'to get off/go down', context: 'Bajo en la próxima parada' },
+                { spanish: 'cambiar', english: 'to change', context: 'Cambio de tren en Madrid' },
+                { spanish: 'perder', english: 'to miss/lose', context: 'Perdí el tren' },
+                { spanish: 'el mapa', english: 'map', context: 'Miro el mapa' },
+                { spanish: 'perderse', english: 'to get lost', context: 'Me perdí en la ciudad' },
+                { spanish: 'la dirección', english: 'address/direction', context: 'No sé la dirección' },
+                { spanish: 'todo recto', english: 'straight ahead', context: 'Sigue todo recto' },
+                { spanish: 'a la derecha', english: 'to the right', context: 'Gira a la derecha' },
+                { spanish: 'a la izquierda', english: 'to the left', context: 'Está a la izquierda' },
+                { spanish: 'al final de', english: 'at the end of', context: 'Al final de la calle' },
+                { spanish: 'cerca de', english: 'near', context: 'Está cerca de aquí' },
+                { spanish: 'lejos de', english: 'far from', context: 'Está lejos de la estación' },
+                { spanish: 'entre', english: 'between', context: 'Entre el banco y la farmacia' },
+                { spanish: 'enfrente de', english: 'opposite', context: 'Enfrente del cine' },
+                { spanish: 'al lado de', english: 'next to', context: 'Al lado del supermercado' },
+                { spanish: 'detrás de', english: 'behind', context: 'Detrás de la iglesia' },
+                { spanish: 'delante de', english: 'in front of', context: 'Delante del hotel' }
+            ],
+            house: [
+                { spanish: 'la casa', english: 'house', context: 'Vivo en una casa grande' },
+                { spanish: 'el piso', english: 'flat/apartment', context: 'Tengo un piso en el centro' },
+                { spanish: 'vivir', english: 'to live', context: 'Vivo en Londres' },
+                { spanish: 'la habitación', english: 'room/bedroom', context: 'Mi habitación es pequeña' },
+                { spanish: 'el dormitorio', english: 'bedroom', context: 'El dormitorio es acogedor' },
+                { spanish: 'el salón', english: 'living room', context: 'Veo la tele en el salón' },
+                { spanish: 'la cocina', english: 'kitchen', context: 'Cocino en la cocina' },
+                { spanish: 'el comedor', english: 'dining room', context: 'Comemos en el comedor' },
+                { spanish: 'el baño', english: 'bathroom', context: 'El baño es moderno' },
+                { spanish: 'el cuarto de baño', english: 'bathroom', context: 'Hay dos cuartos de baño' },
+                { spanish: 'el jardín', english: 'garden', context: 'Tenemos un jardín grande' },
+                { spanish: 'el garaje', english: 'garage', context: 'El coche está en el garaje' },
+                { spanish: 'el sótano', english: 'basement', context: 'Guardamos cosas en el sótano' },
+                { spanish: 'el ático', english: 'attic', context: 'El ático es oscuro' },
+                { spanish: 'la escalera', english: 'stairs', context: 'Subo las escaleras' },
+                { spanish: 'el ascensor', english: 'lift/elevator', context: 'Cojo el ascensor' },
+                { spanish: 'la puerta', english: 'door', context: 'Cierra la puerta' },
+                { spanish: 'la ventana', english: 'window', context: 'Abro la ventana' },
+                { spanish: 'el suelo', english: 'floor/ground', context: 'El suelo es de madera' },
+                { spanish: 'la pared', english: 'wall', context: 'Las paredes son blancas' },
+                { spanish: 'el techo', english: 'ceiling/roof', context: 'El techo es alto' },
+                { spanish: 'la cama', english: 'bed', context: 'Mi cama es cómoda' },
+                { spanish: 'el armario', english: 'wardrobe', context: 'Guardo la ropa en el armario' },
+                { spanish: 'la estantería', english: 'bookshelf', context: 'Tengo muchos libros en la estantería' },
+                { spanish: 'el escritorio', english: 'desk', context: 'Estudio en mi escritorio' },
+                { spanish: 'la silla', english: 'chair', context: 'La silla es incómoda' },
+                { spanish: 'la mesa', english: 'table', context: 'Comemos en la mesa' },
+                { spanish: 'el sofá', english: 'sofa', context: 'Me siento en el sofá' },
+                { spanish: 'el sillón', english: 'armchair', context: 'El sillón es muy cómodo' },
+                { spanish: 'la televisión', english: 'television', context: 'Veo la televisión' },
+                { spanish: 'la nevera', english: 'fridge', context: 'La comida está en la nevera' },
+                { spanish: 'el horno', english: 'oven', context: 'Cocino en el horno' },
+                { spanish: 'el microondas', english: 'microwave', context: 'Caliento la comida en el microondas' },
+                { spanish: 'el lavaplatos', english: 'dishwasher', context: 'Pongo los platos en el lavaplatos' },
+                { spanish: 'la lavadora', english: 'washing machine', context: 'Lavo la ropa en la lavadora' },
+                { spanish: 'la ducha', english: 'shower', context: 'Me ducho por la mañana' },
+                { spanish: 'la bañera', english: 'bathtub', context: 'Me relajo en la bañera' },
+                { spanish: 'el espejo', english: 'mirror', context: 'Me miro en el espejo' },
+                { spanish: 'la lámpara', english: 'lamp', context: 'Enciendo la lámpara' },
+                { spanish: 'la luz', english: 'light', context: 'Apago la luz' },
+                { spanish: 'grande', english: 'big', context: 'Mi casa es muy grande' },
+                { spanish: 'pequeño/a', english: 'small', context: 'Mi habitación es pequeña' },
+                { spanish: 'moderno/a', english: 'modern', context: 'El piso es moderno' },
+                { spanish: 'antiguo/a', english: 'old/ancient', context: 'La casa es antigua' },
+                { spanish: 'cómodo/a', english: 'comfortable', context: 'El sofá es muy cómodo' },
+                { spanish: 'incómodo/a', english: 'uncomfortable', context: 'La silla es incómoda' },
+                { spanish: 'limpio/a', english: 'clean', context: 'Mi habitación está limpia' },
+                { spanish: 'sucio/a', english: 'dirty', context: 'El baño está sucio' },
+                { spanish: 'ordenado/a', english: 'tidy', context: 'Mi cuarto está ordenado' },
+                { spanish: 'desordenado/a', english: 'messy', context: 'Tu habitación está desordenada' }
+            ],
+            town: [
+                { spanish: 'el centro', english: 'centre/downtown', context: 'Voy al centro de la ciudad' },
+                { spanish: 'el banco', english: 'bank', context: 'Saco dinero del banco' },
+                { spanish: 'la tienda', english: 'shop', context: 'Compro en la tienda' },
+                { spanish: 'el supermercado', english: 'supermarket', context: 'Voy al supermercado' },
+                { spanish: 'el mercado', english: 'market', context: 'El mercado es muy animado' },
+                { spanish: 'la farmacia', english: 'pharmacy', context: 'Compro medicinas en la farmacia' },
+                { spanish: 'la panadería', english: 'bakery', context: 'El pan de la panadería es delicioso' },
+                { spanish: 'la carnicería', english: 'butcher', context: 'Compro carne en la carnicería' },
+                { spanish: 'la pescadería', english: 'fishmonger', context: 'El pescado fresco está en la pescadería' },
+                { spanish: 'la pastelería', english: 'cake shop', context: 'Compro tartas en la pastelería' },
+                { spanish: 'la biblioteca', english: 'library', context: 'Leo libros en la biblioteca' },
+                { spanish: 'el parque', english: 'park', context: 'Paseo por el parque' },
+                { spanish: 'el museo', english: 'museum', context: 'Visitamos el museo de arte' },
+                { spanish: 'el teatro', english: 'theatre', context: 'Voy al teatro este sábado' },
+                { spanish: 'el hospital', english: 'hospital', context: 'Mi madre trabaja en el hospital' },
+                { spanish: 'la iglesia', english: 'church', context: 'La iglesia es muy antigua' },
+                { spanish: 'la catedral', english: 'cathedral', context: 'La catedral es impresionante' },
+                { spanish: 'el castillo', english: 'castle', context: 'Visitamos el castillo medieval' },
+                { spanish: 'la oficina de correos', english: 'post office', context: 'Envío cartas en la oficina de correos' },
+                { spanish: 'la comisaría', english: 'police station', context: 'La comisaría está cerca' },
+                { spanish: 'el ayuntamiento', english: 'town hall', context: 'El ayuntamiento está en el centro' },
+                { spanish: 'la plaza', english: 'square', context: 'Nos encontramos en la plaza' },
+                { spanish: 'la calle', english: 'street', context: 'Vivo en esta calle' },
+                { spanish: 'la avenida', english: 'avenue', context: 'Es una avenida ancha' },
+                { spanish: 'el puente', english: 'bridge', context: 'Cruzamos el puente' },
+                { spanish: 'el río', english: 'river', context: 'El río es muy bonito' },
+                { spanish: 'el lago', english: 'lake', context: 'Vamos al lago en verano' },
+                { spanish: 'el bosque', english: 'forest', context: 'Caminamos por el bosque' },
+                { spanish: 'la zona verde', english: 'green space', context: 'Hay muchas zonas verdes' },
+                { spanish: 'el edificio', english: 'building', context: 'Es un edificio alto' },
+                { spanish: 'el rascacielos', english: 'skyscraper', context: 'Hay muchos rascacielos' },
+                { spanish: 'el monumento', english: 'monument', context: 'El monumento es famoso' },
+                { spanish: 'la estatua', english: 'statue', context: 'La estatua es de bronce' },
+                { spanish: 'la fuente', english: 'fountain', context: 'La fuente es muy bonita' },
+                { spanish: 'el semáforo', english: 'traffic light', context: 'Espero en el semáforo' },
+                { spanish: 'el cruce', english: 'crossroads', context: 'Gira en el cruce' },
+                { spanish: 'la acera', english: 'pavement/sidewalk', context: 'Camino por la acera' },
+                { spanish: 'el aparcamiento', english: 'car park', context: 'Aparco en el aparcamiento' },
+                { spanish: 'la parada', english: 'stop', context: 'La parada de autobús está allí' },
+                { spanish: 'el barrio', english: 'neighbourhood', context: 'Vivo en un barrio tranquilo' },
+                { spanish: 'las afueras', english: 'outskirts', context: 'Vivimos en las afueras' },
+                { spanish: 'el campo', english: 'countryside', context: 'Prefiero el campo a la ciudad' },
+                { spanish: 'rural', english: 'rural', context: 'Es una zona rural' },
+                { spanish: 'urbano/a', english: 'urban', context: 'Prefiero la vida urbana' },
+                { spanish: 'tranquilo/a', english: 'quiet/peaceful', context: 'Mi pueblo es muy tranquilo' },
+                { spanish: 'ruidoso/a', english: 'noisy', context: 'La ciudad es ruidosa' },
+                { spanish: 'animado/a', english: 'lively', context: 'El centro es muy animado' },
+                { spanish: 'aburrido/a', english: 'boring', context: 'Mi pueblo es un poco aburrido' },
+                { spanish: 'contaminado/a', english: 'polluted', context: 'El aire está contaminado' },
+                { spanish: 'limpio/a', english: 'clean', context: 'Las calles están limpias' }
+            ],
+            health: [
+                { spanish: 'la salud', english: 'health', context: 'La salud es muy importante' },
+                { spanish: 'sano/a', english: 'healthy', context: 'Llevo una vida sana' },
+                { spanish: 'enfermo/a', english: 'ill/sick', context: 'Estoy enfermo hoy' },
+                { spanish: 'estar resfriado/a', english: 'to have a cold', context: 'Estoy resfriado' },
+                { spanish: 'el resfriado', english: 'cold', context: 'Tengo un resfriado horrible' },
+                { spanish: 'la gripe', english: 'flu', context: 'Tengo la gripe' },
+                { spanish: 'la tos', english: 'cough', context: 'Tengo una tos terrible' },
+                { spanish: 'toser', english: 'to cough', context: 'No puedo parar de toser' },
+                { spanish: 'estornudar', english: 'to sneeze', context: 'Estornudo mucho' },
+                { spanish: 'doler', english: 'to hurt', context: 'Me duele la cabeza' },
+                { spanish: 'el dolor', english: 'pain', context: 'Tengo un dolor fuerte' },
+                { spanish: 'la cabeza', english: 'head', context: 'Me duele la cabeza' },
+                { spanish: 'el estómago', english: 'stomach', context: 'Me duele el estómago' },
+                { spanish: 'la garganta', english: 'throat', context: 'Tengo dolor de garganta' },
+                { spanish: 'la espalda', english: 'back', context: 'Me duele la espalda' },
+                { spanish: 'el brazo', english: 'arm', context: 'Me rompí el brazo' },
+                { spanish: 'la pierna', english: 'leg', context: 'Me duele la pierna' },
+                { spanish: 'el pie', english: 'foot', context: 'Tengo el pie hinchado' },
+                { spanish: 'la mano', english: 'hand', context: 'Me corté la mano' },
+                { spanish: 'el dedo', english: 'finger', context: 'Me quemé el dedo' },
+                { spanish: 'el oído', english: 'ear (inner)', context: 'Me duele el oído' },
+                { spanish: 'la oreja', english: 'ear (outer)', context: 'Tengo las orejas frías' },
+                { spanish: 'la nariz', english: 'nose', context: 'Tengo la nariz tapada' },
+                { spanish: 'la boca', english: 'mouth', context: 'Me duele la boca' },
+                { spanish: 'el diente', english: 'tooth', context: 'Me duele el diente' },
+                { spanish: 'el médico', english: 'doctor', context: 'Voy al médico' },
+                { spanish: 'la médica', english: 'doctor (female)', context: 'La médica me examina' },
+                { spanish: 'el dentista', english: 'dentist', context: 'Tengo cita con el dentista' },
+                { spanish: 'el hospital', english: 'hospital', context: 'Fui al hospital' },
+                { spanish: 'la ambulancia', english: 'ambulance', context: 'Llamaron una ambulancia' },
+                { spanish: 'la medicina', english: 'medicine', context: 'Tomo medicina tres veces al día' },
+                { spanish: 'la pastilla', english: 'pill/tablet', context: 'Tomo una pastilla después de comer' },
+                { spanish: 'el jarabe', english: 'syrup', context: 'El jarabe para la tos es horrible' },
+                { spanish: 'la receta', english: 'prescription', context: 'Necesito una receta' },
+                { spanish: 'el tratamiento', english: 'treatment', context: 'El tratamiento dura dos semanas' },
+                { spanish: 'la cita', english: 'appointment', context: 'Tengo cita a las tres' },
+                { spanish: 'la herida', english: 'wound/injury', context: 'La herida es profunda' },
+                { spanish: 'la sangre', english: 'blood', context: 'Hay mucha sangre' },
+                { spanish: 'la fiebre', english: 'fever', context: 'Tengo mucha fiebre' },
+                { spanish: 'el termómetro', english: 'thermometer', context: 'El termómetro marca 39 grados' },
+                { spanish: 'la temperatura', english: 'temperature', context: 'Tengo la temperatura alta' },
+                { spanish: 'cansado/a', english: 'tired', context: 'Estoy muy cansado' },
+                { spanish: 'débil', english: 'weak', context: 'Me siento muy débil' },
+                { spanish: 'mareado/a', english: 'dizzy', context: 'Estoy mareado' },
+                { spanish: 'vomitar', english: 'to vomit', context: 'Vomité esta mañana' },
+                { spanish: 'la alergia', english: 'allergy', context: 'Tengo alergia al polen' },
+                { spanish: 'el estrés', english: 'stress', context: 'Tengo mucho estrés' },
+                { spanish: 'estresado/a', english: 'stressed', context: 'Estoy muy estresado' },
+                { spanish: 'relajarse', english: 'to relax', context: 'Necesito relajarme' },
+                { spanish: 'dormir', english: 'to sleep', context: 'Necesito dormir más' },
+                { spanish: 'descansar', english: 'to rest', context: 'El médico dice que debo descansar' }
+            ],
+            future: [
+                { spanish: 'el futuro', english: 'future', context: 'El futuro es emocionante' },
+                { spanish: 'en el futuro', english: 'in the future', context: 'En el futuro quiero ser médico' },
+                { spanish: 'el plan', english: 'plan', context: 'Mi plan es ir a la universidad' },
+                { spanish: 'el sueño', english: 'dream', context: 'Mi sueño es viajar por el mundo' },
+                { spanish: 'la ambición', english: 'ambition', context: 'Mi ambición es ayudar a la gente' },
+                { spanish: 'el objetivo', english: 'goal/objective', context: 'Mi objetivo es aprobar los exámenes' },
+                { spanish: 'querer', english: 'to want', context: 'Quiero estudiar medicina' },
+                { spanish: 'esperar', english: 'to hope', context: 'Espero ir a la universidad' },
+                { spanish: 'soñar con', english: 'to dream of', context: 'Sueño con ser famoso' },
+                { spanish: 'el trabajo', english: 'work/job', context: 'Busco trabajo' },
+                { spanish: 'el empleo', english: 'employment/job', context: 'Tengo un empleo de verano' },
+                { spanish: 'la profesión', english: 'profession', context: 'Quiero una profesión interesante' },
+                { spanish: 'la carrera', english: 'career', context: 'Mi carrera es importante' },
+                { spanish: 'el médico', english: 'doctor', context: 'Quiero ser médico' },
+                { spanish: 'el enfermero', english: 'nurse (male)', context: 'Mi hermano es enfermero' },
+                { spanish: 'la enfermera', english: 'nurse (female)', context: 'Mi madre es enfermera' },
+                { spanish: 'el abogado', english: 'lawyer', context: 'Quiero ser abogado' },
+                { spanish: 'el ingeniero', english: 'engineer', context: 'Mi padre es ingeniero' },
+                { spanish: 'el científico', english: 'scientist', context: 'Quiero ser científico' },
+                { spanish: 'el arquitecto', english: 'architect', context: 'Los arquitectos diseñan edificios' },
+                { spanish: 'el periodista', english: 'journalist', context: 'Quiero ser periodista' },
+                { spanish: 'el escritor', english: 'writer', context: 'Mi sueño es ser escritor' },
+                { spanish: 'el actor', english: 'actor', context: 'Quiero ser actor de cine' },
+                { spanish: 'el cantante', english: 'singer', context: 'Sueño con ser cantante famoso' },
+                { spanish: 'el músico', english: 'musician', context: 'Quiero ser músico profesional' },
+                { spanish: 'el artista', english: 'artist', context: 'Mi hermana es artista' },
+                { spanish: 'el cocinero', english: 'cook/chef', context: 'Quiero ser cocinero' },
+                { spanish: 'el policía', english: 'police officer', context: 'Mi tío es policía' },
+                { spanish: 'el bombero', english: 'firefighter', context: 'Quiero ser bombero' },
+                { spanish: 'el mecánico', english: 'mechanic', context: 'Los mecánicos arreglan coches' },
+                { spanish: 'el electricista', english: 'electrician', context: 'Necesitamos un electricista' },
+                { spanish: 'el fontanero', english: 'plumber', context: 'El fontanero viene mañana' },
+                { spanish: 'el peluquero', english: 'hairdresser', context: 'Voy al peluquero' },
+                { spanish: 'el dependiente', english: 'shop assistant', context: 'Trabajo como dependiente' },
+                { spanish: 'el veterinario', english: 'vet', context: 'Quiero ser veterinario' },
+                { spanish: 'trabajar', english: 'to work', context: 'Quiero trabajar con animales' },
+                { spanish: 'estudiar', english: 'to study', context: 'Voy a estudiar en la universidad' },
+                { spanish: 'la universidad', english: 'university', context: 'Quiero ir a la universidad' },
+                { spanish: 'el título', english: 'degree/qualification', context: 'Necesito un título universitario' },
+                { spanish: 'la licenciatura', english: 'degree', context: 'Haré una licenciatura en ciencias' },
+                { spanish: 'el máster', english: 'masters degree', context: 'Después haré un máster' },
+                { spanish: 'la entrevista', english: 'interview', context: 'Tengo una entrevista de trabajo' },
+                { spanish: 'el curriculum', english: 'CV/resume', context: 'Necesito actualizar mi curriculum' },
+                { spanish: 'solicitar', english: 'to apply for', context: 'Voy a solicitar el trabajo' },
+                { spanish: 'el jefe', english: 'boss', context: 'Mi jefe es muy estricto' },
+                { spanish: 'la empresa', english: 'company', context: 'Quiero trabajar en una empresa grande' },
+                { spanish: 'la oficina', english: 'office', context: 'Trabajo en una oficina' },
+                { spanish: 'el salario', english: 'salary', context: 'El salario es bueno' },
+                { spanish: 'ganar', english: 'to earn', context: 'Quiero ganar mucho dinero' },
+                { spanish: 'el dinero', english: 'money', context: 'Necesito dinero para la universidad' },
+                { spanish: 'ahorrar', english: 'to save', context: 'Ahorro dinero cada mes' },
+                { spanish: 'gastar', english: 'to spend', context: 'Gasto mucho dinero en ropa' }
+            ]
+        };
+
+        // Combine all vocabulary
+        const allWords = Object.values(vocabulary).flat();
+
+        // User Progress Data (Using localStorage for persistence)
+        let userData = {
+            wordsLearned: 0,
+            streakDays: 0,
+            totalCorrect: 0,
+            totalAttempts: 0,
+            points: 0,
+            lastVisit: null,
+            wordProgress: {}
+        };
+
+        // Spaced Repetition Algorithm (SM-2 simplified)
+        class SpacedRepetition {
+            constructor() {
+                this.intervals = [1, 3, 7, 14, 30]; // Days between reviews
+            }
+
+            getDueWords() {
+                const today = new Date().toDateString();
+                return allWords.filter(word => {
+                    const progress = userData.wordProgress[word.spanish];
+                    if (!progress) return true; // New word
+                    if (!progress.nextReview) return true;
+                    return new Date(progress.nextReview) <= new Date(today);
+                });
+            }
+
+            updateWord(word, correct) {
+                if (!userData.wordProgress[word.spanish]) {
+                    userData.wordProgress[word.spanish] = {
+                        level: 0,
+                        timesCorrect: 0,
+                        timesIncorrect: 0,
+                        lastSeen: new Date().toISOString()
+                    };
+                }
+
+                const progress = userData.wordProgress[word.spanish];
+                if (correct) {
+                    progress.timesCorrect++;
+                    progress.level = Math.min(progress.level + 1, this.intervals.length - 1);
+                } else {
+                    progress.timesIncorrect++;
+                    progress.level = Math.max(0, progress.level - 1);
+                }
+
+                const nextReviewDate = new Date();
+                nextReviewDate.setDate(nextReviewDate.getDate() + this.intervals[progress.level]);
+                progress.nextReview = nextReviewDate.toISOString();
+                progress.lastSeen = new Date().toISOString();
+
+                saveUserData();
+            }
+        }
+
+        const spacedRep = new SpacedRepetition();
+
+        // Load user data from localStorage
+        function loadUserData() {
+            const saved = localStorage.getItem('spanishGCSEData');
+            if (saved) {
+                userData = JSON.parse(saved);
+                updateStats();
+                checkStreak();
+            }
+        }
+
+        function saveUserData() {
+            localStorage.setItem('spanishGCSEData', JSON.stringify(userData));
+        }
+
+        function checkStreak() {
+            const today = new Date().toDateString();
+            const lastVisit = userData.lastVisit;
+
+            if (lastVisit === today) {
+                return; // Already visited today
+            }
+
+            if (lastVisit) {
+                const lastDate = new Date(lastVisit);
+                const todayDate = new Date(today);
+                const diffDays = Math.floor((todayDate - lastDate) / (1000 * 60 * 60 * 24));
+
+                if (diffDays === 1) {
+                    userData.streakDays++;
+                    showAchievement('Streak Extended! 🔥', `${userData.streakDays} days in a row!`);
+                } else if (diffDays > 1) {
+                    userData.streakDays = 1;
+                }
+            } else {
+                userData.streakDays = 1;
+            }
+
+            userData.lastVisit = today;
+            saveUserData();
+            updateStats();
+        }
+
+        function updateStats() {
+            document.getElementById('wordsLearned').textContent = Object.keys(userData.wordProgress).length;
+            document.getElementById('streakDays').textContent = userData.streakDays;
+            
+            const accuracy = userData.totalAttempts > 0 
+                ? Math.round((userData.totalCorrect / userData.totalAttempts) * 100) 
+                : 0;
+            document.getElementById('accuracy').textContent = accuracy + '%';
+            document.getElementById('totalPoints').textContent = userData.points;
+        }
+
+        function addPoints(amount) {
+            userData.points += amount;
+            updateStats();
+            
+            // Check for point milestones
+            if (userData.points === 100) {
+                showAchievement('Century! 🎯', 'You earned 100 points!');
+            } else if (userData.points === 500) {
+                showAchievement('Star Student! ⭐', 'You reached 500 points!');
+            } else if (userData.points === 1000) {
+                showAchievement('GCSE Master! 🏆', 'You reached 1000 points!');
+            }
+        }
+
+        function showAchievement(title, text) {
+            document.getElementById('achievementTitle').textContent = title;
+            document.getElementById('achievementText').textContent = text;
+            document.getElementById('achievementPopup').classList.add('show');
+            
+            setTimeout(() => {
+                document.getElementById('achievementPopup').classList.remove('show');
+            }, 3000);
+        }
+
+        function closeAchievement() {
+            document.getElementById('achievementPopup').classList.remove('show');
+        }
+
+        // Mode functions
+        let currentMode = null;
+        let currentWordIndex = 0;
+        let currentWords = [];
+
+        function startMode(mode) {
+            currentMode = mode;
+            document.getElementById('modeSelector').style.display = 'none';
+            document.getElementById('learningArea').classList.add('active');
+            
+            // Get words due for review (spaced repetition)
+            currentWords = spacedRep.getDueWords();
+            
+            // If no words due, use random selection
+            if (currentWords.length === 0) {
+                currentWords = [...allWords].sort(() => Math.random() - 0.5).slice(0, 10);
+            } else {
+                // Shuffle and limit to 10 for session
+                currentWords = currentWords.sort(() => Math.random() - 0.5).slice(0, 10);
+            }
+            
+            currentWordIndex = 0;
+
+            switch(mode) {
+                case 'flashcards':
+                    showFlashcard();
+                    break;
+                case 'quiz':
+                    showQuiz();
+                    break;
+                case 'conjugation':
+                    showConjugation();
+                    break;
+                case 'sentences':
+                    showSentencePractice();
+                    break;
+            }
+        }
+
+        function backToMenu() {
+            document.getElementById('modeSelector').style.display = 'grid';
+            document.getElementById('learningArea').classList.remove('active');
+            currentMode = null;
+        }
+
+        // Flashcard Mode
+        function showFlashcard() {
+            if (currentWordIndex >= currentWords.length) {
+                showCompletion();
+                return;
+            }
+
+            const word = currentWords[currentWordIndex];
+            const progress = (currentWordIndex / currentWords.length) * 100;
+
+            document.getElementById('content').innerHTML = `
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: ${progress}%"></div>
+                </div>
+                <div class="flashcard" id="flashcard" onclick="flipCard()">
+                    <div class="flashcard-inner">
+                        <div class="flashcard-front">
+                            <div class="word-display">${word.spanish}</div>
+                            <p>Click to reveal translation</p>
+                        </div>
+                        <div class="flashcard-back">
+                            <div class="word-display">${word.english}</div>
+                            <div class="context-sentence">"${word.context}"</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="controls">
+                    <button class="btn btn-secondary" onclick="rateWord(false)">
+                        <span>😕 Need Practice</span>
+                    </button>
+                    <button class="btn btn-success" onclick="rateWord(true)">
+                        <span>😊 Got It!</span>
+                    </button>
+                </div>
+            `;
+        }
+
+        function flipCard() {
+            document.getElementById('flashcard').classList.toggle('flipped');
+        }
+
+        function rateWord(correct) {
+            const word = currentWords[currentWordIndex];
+            spacedRep.updateWord(word, correct);
+            
+            userData.totalAttempts++;
+            if (correct) {
+                userData.totalCorrect++;
+                addPoints(10);
+            } else {
+                addPoints(3);
+            }
+
+            currentWordIndex++;
+            showFlashcard();
+        }
+
+        // Quiz Mode
+        let quizAnswered = false;
+
+        function showQuiz() {
+            if (currentWordIndex >= currentWords.length) {
+                showCompletion();
+                return;
+            }
+
+            const word = currentWords[currentWordIndex];
+            const progress = (currentWordIndex / currentWords.length) * 100;
+            
+            // Generate wrong answers from other words
+            const wrongAnswers = allWords
+                .filter(w => w.spanish !== word.spanish)
+                .sort(() => Math.random() - 0.5)
+                .slice(0, 3)
+                .map(w => w.english);
+            
+            const allAnswers = [...wrongAnswers, word.english]
+                .sort(() => Math.random() - 0.5);
+
+            quizAnswered = false;
+
+            document.getElementById('content').innerHTML = `
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: ${progress}%"></div>
+                </div>
+                <div class="quiz-area">
+                    <div class="question">${word.spanish}</div>
+                    <div class="context-sentence" style="color: var(--text-light); font-style: italic; margin-bottom: 30px;">
+                        "${word.context}"
+                    </div>
+                    <div class="options">
+                        ${allAnswers.map(answer => `
+                            <button class="option-btn" onclick="checkAnswer('${answer}', '${word.english}', '${word.spanish}')">
+                                ${answer}
+                            </button>
+                        `).join('')}
+                    </div>
+                    <div id="feedback"></div>
+                </div>
+            `;
+        }
+
+        function checkAnswer(selected, correct, spanish) {
+            if (quizAnswered) return;
+            quizAnswered = true;
+
+            const buttons = document.querySelectorAll('.option-btn');
+            const isCorrect = selected === correct;
+            
+            userData.totalAttempts++;
+            if (isCorrect) {
+                userData.totalCorrect++;
+                addPoints(15);
+            } else {
+                addPoints(5);
+            }
+
+            buttons.forEach(btn => {
+                btn.style.pointerEvents = 'none';
+                if (btn.textContent.trim() === correct) {
+                    btn.classList.add('correct');
+                } else if (btn.textContent.trim() === selected) {
+                    btn.classList.add('incorrect');
+                }
+            });
+
+            const word = currentWords[currentWordIndex];
+            spacedRep.updateWord(word, isCorrect);
+
+            const feedback = document.getElementById('feedback');
+            if (isCorrect) {
+                feedback.className = 'feedback correct';
+                feedback.innerHTML = `<strong>¡Correcto!</strong> Well done! 🎉`;
+            } else {
+                feedback.className = 'feedback incorrect';
+                feedback.innerHTML = `<strong>Not quite!</strong> The correct answer is: <strong>${correct}</strong>`;
+            }
+
+            setTimeout(() => {
+                currentWordIndex++;
+                showQuiz();
+            }, 2000);
+        }
+
+        // Conjugation Practice
+        const verbs = [
+            { infinitive: 'hablar', english: 'to speak', stem: 'habl', endings: ['o', 'as', 'a', 'amos', 'áis', 'an'] },
+            { infinitive: 'comer', english: 'to eat', stem: 'com', endings: ['o', 'es', 'e', 'emos', 'éis', 'en'] },
+            { infinitive: 'vivir', english: 'to live', stem: 'viv', endings: ['o', 'es', 'e', 'imos', 'ís', 'en'] },
+            { infinitive: 'ser', english: 'to be', stem: '', endings: ['soy', 'eres', 'es', 'somos', 'sois', 'son'] },
+            { infinitive: 'estar', english: 'to be', stem: '', endings: ['estoy', 'estás', 'está', 'estamos', 'estáis', 'están'] },
+            { infinitive: 'tener', english: 'to have', stem: '', endings: ['tengo', 'tienes', 'tiene', 'tenemos', 'tenéis', 'tienen'] }
+        ];
+
+        const pronouns = ['yo', 'tú', 'él/ella', 'nosotros', 'vosotros', 'ellos/ellas'];
+
+        function showConjugation() {
+            const verb = verbs[Math.floor(Math.random() * verbs.length)];
+            const pronoun = pronouns[Math.floor(Math.random() * pronouns.length)];
+            const pronounIndex = pronouns.indexOf(pronoun);
+            const correctAnswer = verb.stem ? verb.stem + verb.endings[pronounIndex] : verb.endings[pronounIndex];
+
+            document.getElementById('content').innerHTML = `
+                <div class="quiz-area">
+                    <h2 style="color: var(--accent); margin-bottom: 20px;">Conjugate: ${verb.infinitive} (${verb.english})</h2>
+                    <div class="question">Subject: <strong style="color: var(--primary);">${pronoun}</strong></div>
+                    <div class="input-area">
+                        <input type="text" 
+                               class="spanish-input" 
+                               id="conjugationInput" 
+                               placeholder="Type your answer..."
+                               autocomplete="off"
+                               onkeypress="if(event.key==='Enter') checkConjugation('${correctAnswer}', '${verb.infinitive}')">
+                    </div>
+                    <button class="btn btn-primary" onclick="checkConjugation('${correctAnswer}', '${verb.infinitive}')">
+                        <span>Check Answer</span>
+                    </button>
+                    <div id="feedback"></div>
+                    <div style="margin-top: 40px;">
+                        <h3 style="color: var(--accent); margin-bottom: 15px;">Full Conjugation Reference:</h3>
+                        <table class="conjugation-table">
+                            ${pronouns.map((p, i) => `
+                                <tr>
+                                    <td class="pronoun">${p}</td>
+                                    <td>${verb.stem ? verb.stem + verb.endings[i] : verb.endings[i]}</td>
+                                </tr>
+                            `).join('')}
+                        </table>
+                    </div>
+                </div>
+            `;
+
+            document.getElementById('conjugationInput').focus();
+        }
+
+        function checkConjugation(correct, verb) {
+            const input = document.getElementById('conjugationInput').value.trim().toLowerCase();
+            const isCorrect = input === correct.toLowerCase();
+
+            userData.totalAttempts++;
+            if (isCorrect) {
+                userData.totalCorrect++;
+                addPoints(20);
+            } else {
+                addPoints(5);
+            }
+
+            const feedback = document.getElementById('feedback');
+            if (isCorrect) {
+                feedback.className = 'feedback correct';
+                feedback.innerHTML = `<strong>¡Perfecto!</strong> That's correct! 🎯`;
+            } else {
+                feedback.className = 'feedback incorrect';
+                feedback.innerHTML = `<strong>Not quite!</strong> The correct answer is: <strong>${correct}</strong>`;
+            }
+
+            setTimeout(() => {
+                showConjugation();
+            }, 2500);
+        }
+
+        // Sentence Practice
+        function showSentencePractice() {
+            if (currentWordIndex >= currentWords.length) {
+                showCompletion();
+                return;
+            }
+
+            const word = currentWords[currentWordIndex];
+            const progress = (currentWordIndex / currentWords.length) * 100;
+
+            // Create a sentence with a blank
+            const sentenceParts = word.context.split(new RegExp(`(${word.spanish})`, 'i'));
+            const blankSentence = sentenceParts.map(part => 
+                part.toLowerCase() === word.spanish.toLowerCase() ? '________' : part
+            ).join('');
+
+            document.getElementById('content').innerHTML = `
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: ${progress}%"></div>
+                </div>
+                <div class="quiz-area">
+                    <h2 style="color: var(--accent); margin-bottom: 20px;">Complete the sentence:</h2>
+                    <div class="question">${blankSentence}</div>
+                    <div style="margin: 20px 0; color: var(--text-light);">
+                        <strong>Hint:</strong> ${word.english}
+                    </div>
+                    <div class="input-area">
+                        <input type="text" 
+                               class="spanish-input" 
+                               id="sentenceInput" 
+                               placeholder="Type the missing word..."
+                               autocomplete="off"
+                               onkeypress="if(event.key==='Enter') checkSentence('${word.spanish}')">
+                    </div>
+                    <button class="btn btn-primary" onclick="checkSentence('${word.spanish}')">
+                        <span>Check Answer</span>
+                    </button>
+                    <div id="feedback"></div>
+                </div>
+            `;
+
+            document.getElementById('sentenceInput').focus();
+        }
+
+        function checkSentence(correct) {
+            const input = document.getElementById('sentenceInput').value.trim().toLowerCase();
+            const isCorrect = input === correct.toLowerCase();
+
+            userData.totalAttempts++;
+            if (isCorrect) {
+                userData.totalCorrect++;
+                addPoints(25);
+            } else {
+                addPoints(5);
+            }
+
+            const word = currentWords[currentWordIndex];
+            spacedRep.updateWord(word, isCorrect);
+
+            const feedback = document.getElementById('feedback');
+            if (isCorrect) {
+                feedback.className = 'feedback correct';
+                feedback.innerHTML = `<strong>¡Excelente!</strong> Perfect! The complete sentence is:<br><em>"${word.context}"</em>`;
+            } else {
+                feedback.className = 'feedback incorrect';
+                feedback.innerHTML = `<strong>Not quite!</strong> The correct answer is: <strong>${correct}</strong><br>Complete sentence: <em>"${word.context}"</em>`;
+            }
+
+            setTimeout(() => {
+                currentWordIndex++;
+                showSentencePractice();
+            }, 3000);
+        }
+
+        // Completion Screen
+        function showCompletion() {
+            const sessionCorrect = currentWords.filter(word => {
+                const progress = userData.wordProgress[word.spanish];
+                return progress && progress.timesCorrect > progress.timesIncorrect;
+            }).length;
+
+            const percentage = Math.round((sessionCorrect / currentWords.length) * 100);
+
+            document.getElementById('content').innerHTML = `
+                <div style="text-align: center; padding: 40px;">
+                    <div style="font-size: 5em; margin-bottom: 20px;">🎉</div>
+                    <h2 style="color: var(--accent); font-size: 2.5em; margin-bottom: 20px;">
+                        Session Complete!
+                    </h2>
+                    <div style="font-size: 1.3em; color: var(--text); margin-bottom: 30px;">
+                        You got <strong style="color: var(--primary);">${sessionCorrect} out of ${currentWords.length}</strong> words correct!
+                    </div>
+                    <div style="font-size: 3em; font-weight: 700; color: var(--success); margin-bottom: 30px;">
+                        ${percentage}%
+                    </div>
+                    <div class="controls">
+                        <button class="btn btn-primary" onclick="startMode('${currentMode}')">
+                            <span>Practice Again</span>
+                        </button>
+                        <button class="btn btn-secondary" onclick="backToMenu()">
+                            <span>Back to Menu</span>
+                        </button>
+                    </div>
+                </div>
+            `;
+
+            saveUserData();
+        }
+
+        // Initialize
+        loadUserData();
+    </script>
+</body>
+</html>
